@@ -12,13 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- VLibras -->
+    <link rel="stylesheet" href="https://vlibras.gov.br/app/vlibras-plugin.css">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
+            --primary-color: #000000;
+            --secondary-color: #000000;
+            --accent-color: #000000;
+            --light-color: #000000;
+            --dark-color: #000000;
         }
         
         body {
@@ -26,6 +28,35 @@
             overflow-x: hidden;
             color: #333;
             line-height: 1.6;
+            position: relative;
+            padding-top: 60px; /* Espaço para a barra de acessibilidade */
+        }
+        
+        /* Barra de Acessibilidade */
+        .accessibility-bar {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1050;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .accessibility-bar .btn {
+            margin: 0 5px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+        
+        .accessibility-bar .btn i {
+            margin-right: 5px;
         }
         
         .navbar {
@@ -33,6 +64,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 15px 0;
             transition: all 0.3s ease;
+            top: 40px; /* Ajuste para a barra de acessibilidade */
         }
         
         .navbar.scrolled {
@@ -74,6 +106,7 @@
             padding: 100px 0;
             position: relative;
             overflow: hidden;
+            margin-top: 40px; /* Ajuste para a barra de acessibilidade */
         }
         
         .hero-section::before {
@@ -83,7 +116,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            background-color: #000000;
         }
         
         .hero-title {
@@ -398,6 +431,36 @@
             top: 0;
         }
         
+        /* High Contrast Mode */
+        .high-contrast {
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+        
+        .high-contrast .navbar {
+            background-color: #000 !important;
+            border-bottom: 2px solid #fff;
+        }
+        
+        .high-contrast .card {
+            background-color: #000 !important;
+            border: 2px solid #fff !important;
+            color: #fff !important;
+        }
+        
+        .high-contrast .card-title,
+        .high-contrast .section-title {
+            color: #ff0 !important;
+        }
+        
+        .high-contrast .btn-primary {
+            border: 2px solid #fff;
+        }
+        
+        .high-contrast a {
+            color: #0ff !important;
+        }
+        
         /* Animations */
         .pulse-animation {
             animation: pulse 2s infinite;
@@ -444,6 +507,18 @@
             }
         }
         
+        /* VLibras Widget Customization */
+        .vlibras-btn {
+            background-color: var(--secondary-color) !important;
+            border-radius: 50% !important;
+            width: 50px !important;
+            height: 50px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 992px) {
             .hero-title {
@@ -475,45 +550,55 @@
             .navbar-brand {
                 font-size: 1.5rem;
             }
+            
+            .accessibility-bar {
+                padding: 5px 0;
+            }
+            
+            .accessibility-bar .btn {
+                padding: 3px 5px;
+                font-size: 0.8rem;
+                margin: 2px;
+            }
         }
         
-        /* High contrast mode */
-        @media (prefers-contrast: high) {
-            body {
-                background: black;
-                color: white;
+        @media (max-width: 576px) {
+            .accessibility-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 5px;
             }
             
-            .navbar {
-                background: black !important;
-                border-bottom: 2px solid white;
-            }
-            
-            .nav-link {
-                color: white !important;
-            }
-            
-            .card {
-                background: black;
-                border: 2px solid white;
-                color: white;
-            }
-            
-            .card-title {
-                color: yellow !important;
-            }
-            
-            .section-title {
-                color: yellow !important;
-            }
-            
-            .btn-primary {
-                border: 2px solid white;
+            .accessibility-bar .btn {
+                width: 100%;
+                margin: 2px 0;
             }
         }
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- Barra de Acessibilidade -->
+    <div class="accessibility-bar">
+        <button id="high-contrast-toggle" class="btn btn-sm btn-outline-light">
+            <i class="fas fa-adjust"></i> Alto Contraste
+        </button>
+        <button id="font-increase" class="btn btn-sm btn-outline-light">
+            <i class="fas fa-text-height"></i> A+
+        </button>
+        <button id="font-decrease" class="btn btn-sm btn-outline-light">
+            <i class="fas fa-text-width"></i> A-
+        </button>
+        <button id="font-reset" class="btn btn-sm btn-outline-light">
+            <i class="fas fa-font"></i> Resetar Fonte
+        </button>
+        <button id="enable-voice" class="btn btn-sm btn-outline-light">
+            <i class="fas fa-volume-up"></i> Leitor de Tela
+        </button>
+        <button id="keyboard-navigation" class="btn btn-sm btn-outline-light">
+            <i class="fas fa-keyboard"></i> Navegação por Teclado
+        </button>
+    </div>
+    
     <!-- Skip to Content Link -->
     <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
     
@@ -873,7 +958,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-4" data-aos="fade-right">
-                        <img src="https://www.isbrasil.info/blog/_images/blog/destaques/2016/08/11/o-que-e-w3c_f716bf1cc3d94e580b018b565bbc5256.webp" alt="Logo W3C Web Accessibility Initiative" class="img-fluid rounded">
+                        <img src="https://static-00.iconduck.com/assets.00/w3c-icon-2048x2048-f98j9dnx.png" alt="Logo W3C Web Accessibility Initiative" class="img-fluid rounded">
                     </div>
                     <div class="col-lg-6" data-aos="fade-left">
                         <h2 class="section-title">Diretrizes de Acessibilidade para Conteúdo Web (WCAG)</h2>
@@ -967,7 +1052,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
                         <div class="card h-100">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzm1hZRtlVebo3mBY1KpjmH0svDi-XsUOdlA&s" class="card-img-top" alt="e-MAG">
+                            <img src="https://images.seeklogo.com/logo-png/46/1/emag-logo-png_seeklogo-460945.png" class="card-img-top" alt="e-MAG">
                             <div class="card-body">
                                 <h5 class="card-title">e-MAG (Modelo de Acessibilidade)</h5>
                                 <p class="card-text">Padrão brasileiro para acessibilidade em sítios governamentais.</p>
@@ -977,7 +1062,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="card h-100">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvc7OY09uw1tUNNv-xGOyJW7Z1g1jQlN6qSg&s" class="card-img-top" alt="WAVE">
+                            <img src="https://adassoc.org.uk/wp-content/uploads/2021/07/WAVE.jpeg" class="card-img-top" alt="WAVE">
                             <div class="card-body">
                                 <h5 class="card-title">WAVE Evaluation Tool</h5>
                                 <p class="card-text">Ferramenta para avaliação de acessibilidade em páginas web.</p>
@@ -1382,7 +1467,7 @@
             <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; 2025 Acessibilidade Digital. Todos os direitos reservados.</p>
+                    <p class="mb-0">&copy; 2023 Acessibilidade Digital. Todos os direitos reservados.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <ul class="list-inline mb-0">
@@ -1398,12 +1483,22 @@
     <!-- Back to Top Button -->
     <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
+    <!-- VLibras Widget -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS Animation -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- VLibras -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <!-- Main JS -->
     <script>
         // Initialize AOS animation
@@ -1569,6 +1664,41 @@
         // Focus management for modal
         $('#videoModal').on('shown.bs.modal', function() {
             $('#videoModal iframe').focus();
+        });
+        
+        // Initialize VLibras
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+        
+        // Screen reader simulation
+        $('#enable-voice').click(function() {
+            if ('speechSynthesis' in window) {
+                var speechMsg = new SpeechSynthesisUtterance();
+                speechMsg.text = document.querySelector('main').innerText.replace(/\s+/g, ' ').substring(0, 10000);
+                speechMsg.lang = 'pt-BR';
+                speechMsg.rate = 1;
+                
+                if (speechSynthesis.speaking) {
+                    speechSynthesis.cancel();
+                    $(this).html('<i class="fas fa-volume-up"></i> Leitor de Tela');
+                } else {
+                    window.speechSynthesis.speak(speechMsg);
+                    $(this).html('<i class="fas fa-volume-mute"></i> Parar Leitura');
+                }
+            } else {
+                alert('Seu navegador não suporta a API de síntese de voz.');
+            }
+        });
+        
+        // Keyboard navigation mode
+        $('#keyboard-navigation').click(function() {
+            $('body').toggleClass('keyboard-navigation');
+            if ($('body').hasClass('keyboard-navigation')) {
+                $(this).html('<i class="fas fa-mouse-pointer"></i> Modo Mouse');
+                $('a, button, input, [tabindex]').css('outline', '2px solid #e74c3c');
+            } else {
+                $(this).html('<i class="fas fa-keyboard"></i> Navegação por Teclado');
+                $('a, button, input, [tabindex]').css('outline', '');
+            }
         });
     </script>
 </body>
