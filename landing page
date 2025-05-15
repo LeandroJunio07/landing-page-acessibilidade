@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos da Acessibilidade Digital</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(44, 62, 80, 0.95) !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--primary-color);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-title {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .icon-box {
+            background: var(--primary-color);
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(52, 152, 219, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-header button {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .stats-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stats-label {
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control {
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        textarea.form-control {
+            height: auto;
+            padding-top: 15px;
+        }
+        
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-links h5 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Accessibility Focus Styles */
+        a:focus, button:focus, input:focus, textarea:focus, select:focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-color);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Animations */
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .rotate-animation {
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            body {
+                background: black;
+                color: white;
+            }
+            
+            .navbar {
+                background: black !important;
+                border-bottom: 2px solid white;
+            }
+            
+            .nav-link {
+                color: white !important;
+            }
+            
+            .card {
+                background: black;
+                border: 2px solid white;
+                color: white;
+            }
+            
+            .card-title {
+                color: yellow !important;
+            }
+            
+            .section-title {
+                color: yellow !important;
+            }
+            
+            .btn-primary {
+                border: 2px solid white;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- Skip to Content Link -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Acessibilidade Digital</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#importance">Importância</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#users">Usuários</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#laws">Leis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resources">Recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="hero-title animate__animated animate__fadeInDown">Fundamentos da Acessibilidade Digital</h1>
+                    <p class="hero-subtitle animate__animated animate__fadeInDown animate__delay-1s">Promovendo inclusão e igualdade de acesso à informação para todos</p>
+                    <a href="#about" class="btn btn-primary btn-lg animate__animated animate__fadeInUp animate__delay-2s pulse-animation">Saiba Mais</a>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pessoa com deficiência visual usando computador" class="img-fluid rounded-3 floating-animation">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- About Section -->
+        <section id="about" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">O que é Acessibilidade Digital?</h2>
+                <div class="row">
+                    <div class="col-lg-6 mb-4" data-aos="fade-right">
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/dyvZqfp4pr8?si=R_RrjxgDb5k6HmcZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Definição e Conceitos</h3>
+                                <p class="card-text">Acessibilidade digital refere-se à prática de tornar websites, aplicativos, softwares e tecnologias digitais acessíveis a todas as pessoas, independentemente de suas habilidades ou deficiências.</p>
+                                <p>De acordo com o W3C, acessibilidade na web significa que pessoas com deficiência podem perceber, entender, navegar, interagir e contribuir para a web.</p>
+                                <p>A acessibilidade digital beneficia não apenas pessoas com deficiências permanentes, mas também aquelas com limitações temporárias (como um braço quebrado) ou situacionais (como usar um dispositivo móvel em ambiente com muita luz solar).</p>
+                                <div class="alert alert-info mt-3">
+                                    <strong>Diferenciação:</strong> Enquanto inclusão digital refere-se ao acesso geral às tecnologias, a acessibilidade digital foca especificamente em remover barreiras para pessoas com deficiência.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Importance Section -->
+        <section id="importance" class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">Por que a Acessibilidade Digital é Importante?</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card feature-card h-100">
+                            <div class="card-body text-center">
+                                <div class="icon-box">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h4 class="card-title">Social</h4>
+                                <p class="card-text">Garante igualdade de acesso à informação e oportunidades para todas as pessoas, promovendo inclusão social e cidadania.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card feature-card h-100">
+                            <div class="card-body text-center">
+                                <div class="icon-box">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <h4 class="card-title">Legal</h4>
+                                <p class="card-text">No Brasil, a acessibilidade digital é um direito garantido por lei, com normas e regulamentações específicas que devem ser seguidas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card feature-card h-100">
+                            <div class="card-body text-center">
+                                <div class="icon-box">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h4 class="card-title">Técnica</h4>
+                                <p class="card-text">Sites acessíveis têm melhor SEO, são mais usáveis para todos os públicos e seguem as melhores práticas de desenvolvimento web.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-lg-6 mb-4" data-aos="fade-right">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Impacto Social</h3>
+                                <p>No Brasil, segundo o IBGE, cerca de 24% da população possui algum tipo de deficiência. Isso representa aproximadamente 45 milhões de pessoas que podem enfrentar barreiras no acesso a conteúdos digitais.</p>
+                                <p>A acessibilidade digital permite que essas pessoas:</p>
+                                <ul>
+                                    <li>Acessem informações e serviços online</li>
+                                    <li>Participem ativamente da vida social e profissional</li>
+                                    <li>Tenham autonomia no uso de tecnologias</li>
+                                    <li>Exerçam plenamente seus direitos de cidadania</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4" data-aos="fade-left">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Benefícios para Empresas</h3>
+                                <p>Além do cumprimento legal, a acessibilidade digital traz vantagens competitivas:</p>
+                                <ul>
+                                    <li><strong>Ampliação do público-alvo:</strong> Atinge milhões de potenciais clientes</li>
+                                    <li><strong>Melhoria da imagem institucional:</strong> Demonstra responsabilidade social</li>
+                                    <li><strong>Redução de processos judiciais:</strong> Evita ações por discriminação</li>
+                                    <li><strong>Melhor SEO:</strong> Sites acessíveis são melhor indexados</li>
+                                    <li><strong>Experiência do usuário:</strong> Melhora a usabilidade para todos</li>
+                                </ul>
+                                <p>Um site acessível é um site melhor para todos os usuários.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Users Section -->
+        <section id="users" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">Perfil de Usuários que Necessitam de Acessibilidade</h2>
+                <div class="row">
+                    <div class="col-lg-6 mb-4" data-aos="fade-right">
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/Y-C3pjlGaFE?si=u7hYxqp1VvtCZDNN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h3 class="card-title">Estatísticas no Brasil</h3>
+                                <p>Segundo o IBGE (2019), a distribuição de pessoas com deficiência no Brasil é:</p>
+                                <ul>
+                                    <li>Deficiência visual: 3,4% da população</li>
+                                    <li>Deficiência auditiva: 1,1% da população</li>
+                                    <li>Deficiência física: 1,3% da população</li>
+                                    <li>Deficiência intelectual: 0,8% da população</li>
+                                </ul>
+                                <p>Além disso, cerca de 17% da população tem alguma dificuldade permanente de enxergar, ouvir, caminhar ou subir degraus.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title">Tipos de Deficiência e Barreiras Digitais</h3>
+                                <div class="accordion" id="usersAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <i class="fas fa-eye me-2"></i> Deficiência Visual
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#usersAccordion">
+                                            <div class="accordion-body">
+                                                <p>Inclui cegueira total, baixa visão e daltonismo. Barreiras comuns:</p>
+                                                <ul>
+                                                    <li>Imagens sem texto alternativo</li>
+                                                    <li>Contraste insuficiente</li>
+                                                    <li>Navegação não otimizada para leitores de tela</li>
+                                                    <li>Conteúdo em formato não textual (como imagens de texto)</li>
+                                                </ul>
+                                                <p>Soluções: texto alternativo, alto contraste, estrutura semântica, compatibilidade com leitores de tela.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <i class="fas fa-deaf me-2"></i> Deficiência Auditiva
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#usersAccordion">
+                                            <div class="accordion-body">
+                                                <p>Inclui surdez total ou parcial. Barreiras comuns:</p>
+                                                <ul>
+                                                    <li>Áudio sem legendas ou transcrição</li>
+                                                    <li>Conteúdo que depende apenas de alertas sonoros</li>
+                                                    <li>Vídeos sem legendas ou LIBRAS</li>
+                                                </ul>
+                                                <p>Soluções: legendas, transcrições, conteúdo equivalente em texto, opções visuais para alertas.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingThree">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                <i class="fas fa-wheelchair me-2"></i> Deficiência Motora
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#usersAccordion">
+                                            <div class="accordion-body">
+                                                <p>Dificuldades com movimentos finos ou uso de mouse/tela touch. Barreiras comuns:</p>
+                                                <ul>
+                                                    <li>Elementos interativos muito pequenos</li>
+                                                    <li>Dependência exclusiva de mouse</li>
+                                                    <li>Tempo insuficiente para interação</li>
+                                                    <li>Layouts que exigem precisão motora</li>
+                                                </ul>
+                                                <p>Soluções: navegação por teclado, áreas de toque ampliadas, atalhos de teclado, tempo ajustável.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingFour">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                <i class="fas fa-brain me-2"></i> Deficiência Cognitiva
+                                            </button>
+                                        </h2>
+                                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#usersAccordion">
+                                            <div class="accordion-body">
+                                                <p>Inclui dislexia, TDAH, autismo e outras condições. Barreiras comuns:</p>
+                                                <ul>
+                                                    <li>Textos complexos e linguagem técnica</li>
+                                                    <li>Layouts confusos e sobrecarregados</li>
+                                                    <li>Navegação inconsistente</li>
+                                                    <li>Instruções pouco claras</li>
+                                                </ul>
+                                                <p>Soluções: linguagem simples, layout limpo, consistência, opções de personalização.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Laws Section -->
+        <section id="laws" class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">Normas e Leis Brasileiras sobre Acessibilidade</h2>
+                <div class="row">
+                    <div class="col-lg-6 mb-4" data-aos="fade-right">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">Lei Brasileira de Inclusão (LBI)</h3>
+                                <p class="card-text">A Lei nº 13.146/2015, conhecida como Estatuto da Pessoa com Deficiência, estabelece em seu artigo 63:</p>
+                                <blockquote class="blockquote bg-light p-3 border-start border-4 border-primary">
+                                    <p>"É obrigatória a acessibilidade nos sítios da internet mantidos por empresas com sede ou representação comercial no País ou por órgãos de governo, para uso da pessoa com deficiência, garantindo-lhe acesso às informações disponíveis, conforme as melhores práticas e diretrizes de acessibilidade adotadas internacionalmente."</p>
+                                </blockquote>
+                                <p>A LBI prevê multas e sanções para o descumprimento, além de possibilitar ações judiciais por discriminação.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4" data-aos="fade-left">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">Lei Geral de Proteção de Dados (LGPD)</h3>
+                                <p>A LGPD (Lei nº 13.709/2018) tem conexão com a acessibilidade digital em vários aspectos:</p>
+                                <ul>
+                                    <li>Exige que informações sobre tratamento de dados sejam apresentadas de forma acessível</li>
+                                    <li>Garante o direito à informação clara e adequada sobre o uso de dados pessoais</li>
+                                    <li>Requer que mecanismos de consentimento sejam acessíveis</li>
+                                    <li>Prevê que sistemas de tratamento de dados devem considerar a acessibilidade</li>
+                                </ul>
+                                <p>A inacessibilidade pode configurar violação aos princípios da LGPD, especialmente os da transparência e finalidade.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Outras Normas Relevantes</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Norma</th>
+                                                <th>Descrição</th>
+                                                <th>Aplicação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Decreto nº 5.296/2004</td>
+                                                <td>Regulamenta as Leis nº 10.048 e 10.098, estabelecendo critérios básicos para a promoção da acessibilidade</td>
+                                                <td>Sites governamentais e concessionárias de serviços públicos</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Decreto nº 6.949/2009</td>
+                                                <td>Promulga a Convenção Internacional sobre os Direitos das Pessoas com Deficiência</td>
+                                                <td>Todos os âmbitos (equiparação a emenda constitucional)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Portaria nº 03/2007 (MEC)</td>
+                                                <td>Estabelece requisitos de acessibilidade para materiais didáticos digitais</td>
+                                                <td>Instituições de ensino</td>
+                                            </tr>
+                                            <tr>
+                                                <td>e-MAG (Modelo de Acessibilidade em Governo Eletrônico)</td>
+                                                <td>Conjunto de recomendações para acessibilidade na web, baseado no WCAG</td>
+                                                <td>Sites e portais governamentais</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ABNT NBR 9050</td>
+                                                <td>Norma técnica sobre acessibilidade a edificações, mobiliário, espaços e equipamentos urbanos</td>
+                                                <td>Quiosques digitais, totens interativos e equipamentos públicos</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WCAG Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4" data-aos="fade-right">
+                        <img src="https://www.isbrasil.info/blog/_images/blog/destaques/2016/08/11/o-que-e-w3c_f716bf1cc3d94e580b018b565bbc5256.webp" alt="Logo W3C Web Accessibility Initiative" class="img-fluid rounded">
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <h2 class="section-title">Diretrizes de Acessibilidade para Conteúdo Web (WCAG)</h2>
+                        <p>As Web Content Accessibility Guidelines (WCAG) são o padrão internacional desenvolvido pelo W3C para acessibilidade na web. A versão 2.1, atualizada em 2018, estabelece quatro princípios fundamentais:</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary">Perceptível</h5>
+                                        <p class="card-text">A informação e os componentes da interface devem ser apresentados de forma que os usuários possam perceber.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary">Operável</h5>
+                                        <p class="card-text">Os componentes da interface e a navegação devem ser operáveis por todos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary">Compreensível</h5>
+                                        <p class="card-text">A informação e a operação da interface devem ser compreensíveis.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary">Robusto</h5>
+                                        <p class="card-text">O conteúdo deve ser robusto o suficiente para ser interpretado por uma ampla variedade de agentes do usuário, incluindo tecnologias assistivas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3">As WCAG são organizadas em três níveis de conformidade: A (mínimo), AA (recomendado) e AAA (ótimo). No Brasil, o nível AA é o exigido para sites governamentais.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-5 bg-primary text-white">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stats-item">
+                            <div class="stats-number">45M</div>
+                            <div class="stats-label">Pessoas com deficiência no Brasil</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stats-item">
+                            <div class="stats-number">24%</div>
+                            <div class="stats-label">Da população brasileira</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stats-item">
+                            <div class="stats-number">89%</div>
+                            <div class="stats-label">Sites falham em testes básicos de acessibilidade</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stats-item">
+                            <div class="stats-number">72%</div>
+                            <div class="stats-label">Processos por discriminação digital em 2022</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">Recursos e Ferramentas</h2>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100">
+                            <img src="https://static-00.iconduck.com/assets.00/w3c-icon-2048x2048-f98j9dnx.png" class="card-img-top" alt="W3C WAI">
+                            <div class="card-body">
+                                <h5 class="card-title">W3C Web Accessibility Initiative</h5>
+                                <p class="card-text">Portal oficial com diretrizes, tutoriais e recursos sobre acessibilidade web.</p>
+                                <a href="https://www.w3.org/WAI/" class="btn btn-sm btn-primary" target="_blank">Visitar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card h-100">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzm1hZRtlVebo3mBY1KpjmH0svDi-XsUOdlA&s" class="card-img-top" alt="e-MAG">
+                            <div class="card-body">
+                                <h5 class="card-title">e-MAG (Modelo de Acessibilidade)</h5>
+                                <p class="card-text">Padrão brasileiro para acessibilidade em sítios governamentais.</p>
+                                <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital/modelo-de-acessibilidade" class="btn btn-sm btn-primary" target="_blank">Visitar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card h-100">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvc7OY09uw1tUNNv-xGOyJW7Z1g1jQlN6qSg&s" class="card-img-top" alt="WAVE">
+                            <div class="card-body">
+                                <h5 class="card-title">WAVE Evaluation Tool</h5>
+                                <p class="card-text">Ferramenta para avaliação de acessibilidade em páginas web.</p>
+                                <a href="https://wave.webaim.org/" class="btn btn-sm btn-primary" target="_blank">Visitar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card h-100">
+                            <img src="https://developer.apple.com/news/images/og/accessibility-og-twitter.jpg" class="card-img-top" alt="Accessibility Developer Guide">
+                            <div class="card-body">
+                                <h5 class="card-title">Accessibility Developer Guide</h5>
+                                <p class="card-text">Guia prático para desenvolvedores implementarem acessibilidade.</p>
+                                <a href="https://www.accessibility-developer-guide.com/" class="btn btn-sm btn-primary" target="_blank">Visitar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-lg-6 mb-4" data-aos="fade-right">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Checklist Básico de Acessibilidade</h3>
+                                <div class="accordion" id="checklistAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="checklistHeadingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#checklistCollapseOne" aria-expanded="true" aria-controls="checklistCollapseOne">
+                                                Texto Alternativo
+                                            </button>
+                                        </h2>
+                                        <div id="checklistCollapseOne" class="accordion-collapse collapse show" aria-labelledby="checklistHeadingOne" data-bs-parent="#checklistAccordion">
+                                            <div class="accordion-body">
+                                                <p>Todas as imagens não decorativas devem ter texto alternativo descritivo (atributo alt).</p>
+                                                <p>Para imagens complexas (gráficos, infográficos), forneça descrição detalhada no contexto ou via link.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="checklistHeadingTwo">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#checklistCollapseTwo" aria-expanded="false" aria-controls="checklistCollapseTwo">
+                                                Estrutura Semântica
+                                            </button>
+                                        </h2>
+                                        <div id="checklistCollapseTwo" class="accordion-collapse collapse" aria-labelledby="checklistHeadingTwo" data-bs-parent="#checklistAccordion">
+                                            <div class="accordion-body">
+                                                <p>Use cabeçalhos (h1-h6) de forma hierárquica e lógica.</p>
+                                                <p>Utilize elementos HTML semânticos (nav, main, section, article, etc.)</p>
+                                                <p>Listas devem ser marcadas como ul, ol ou dl.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="checklistHeadingThree">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#checklistCollapseThree" aria-expanded="false" aria-controls="checklistCollapseThree">
+                                                Contraste de Cores
+                                            </button>
+                                        </h2>
+                                        <div id="checklistCollapseThree" class="accordion-collapse collapse" aria-labelledby="checklistHeadingThree" data-bs-parent="#checklistAccordion">
+                                            <div class="accordion-body">
+                                                <p>Contraste entre texto e fundo deve ser pelo menos 4.5:1 para texto normal e 3:1 para texto grande (18px ou 14px negrito).</p>
+                                                <p>Evite usar apenas cor para transmitir informação (ex: "itens em vermelho são obrigatórios").</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="checklistHeadingFour">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#checklistCollapseFour" aria-expanded="false" aria-controls="checklistCollapseFour">
+                                                Navegação por Teclado
+                                            </button>
+                                        </h2>
+                                        <div id="checklistCollapseFour" class="accordion-collapse collapse" aria-labelledby="checklistHeadingFour" data-bs-parent="#checklistAccordion">
+                                            <div class="accordion-body">
+                                                <p>Toda funcionalidade deve ser operável via teclado (Tab, Enter, Espaço, setas).</p>
+                                                <p>Não deve haver "armadilhas" de teclado onde o foco fique preso.</p>
+                                                <p>Forneça "pular para conteúdo" para evitar repetição de navegação.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="checklistHeadingFive">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#checklistCollapseFive" aria-expanded="false" aria-controls="checklistCollapseFive">
+                                                Formulários Acessíveis
+                                            </button>
+                                        </h2>
+                                        <div id="checklistCollapseFive" class="accordion-collapse collapse" aria-labelledby="checklistHeadingFive" data-bs-parent="#checklistAccordion">
+                                            <div class="accordion-body">
+                                                <p>Todos os campos devem ter labels associados.</p>
+                                                <p>Forneça instruções claras e mensagens de erro específicas.</p>
+                                                <p>Agrupe itens relacionados com fieldset e legend.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Vídeo: Testando Acessibilidade</h3>
+                                <div class="video-container mb-4">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/H-JkElwDEaA?si=93zpnJ3Gnlfgd6nz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h4 class="mt-4">Ferramentas de Teste</h4>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <strong>WAVE</strong> - Avaliador visual de acessibilidade
+                                        <a href="https://wave.webaim.org/" target="_blank" class="float-end">wave.webaim.org</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>axe DevTools</strong> - Extensão para navegadores
+                                        <a href="https://www.deque.com/axe/" target="_blank" class="float-end">deque.com/axe</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Color Contrast Checker</strong> - Verificador de contraste
+                                        <a href="https://webaim.org/resources/contrastchecker/" target="_blank" class="float-end">webaim.org</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>NVDA</strong> - Leitor de tela gratuito para testes
+                                        <a href="https://www.nvaccess.org/" target="_blank" class="float-end">nvaccess.org</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Lighthouse</strong> - Ferramenta do Chrome DevTools
+                                        <a href="https://developers.google.com/web/tools/lighthouse" target="_blank" class="float-end">google.com/lighthouse</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">Depoimentos</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="testimonial-card">
+                            <p>"Como pessoa com deficiência visual, encontro muitas barreiras diariamente. Quando um site é acessível, isso faz toda a diferença na minha autonomia e qualidade de vida."</p>
+                            <div class="testimonial-author">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=60" alt="Carlos Silva">
+                                <div>
+                                    <h6>Carlos Silva</h6>
+                                    <small>Usuário de leitor de tela</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-card">
+                            <p>"Implementar acessibilidade em nossos produtos não apenas nos ajudou a cumprir a lei, mas também melhorou a experiência para todos os usuários e aumentou nossa base de clientes."</p>
+                            <div class="testimonial-author">
+                                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=60" alt="Ana Paula Rocha">
+                                <div>
+                                    <h6>Ana Paula Rocha</h6>
+                                    <small>Gerente de UX, Empresa Tech</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="testimonial-card">
+                            <p>"Como desenvolvedor, aprender sobre acessibilidade mudou minha forma de programar. Agora vejo como pequenos detalhes podem fazer uma enorme diferença para muitas pessoas."</p>
+                            <div class="testimonial-author">
+                                <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=60" alt="Ricardo Mendes">
+                                <div>
+                                    <h6>Ricardo Mendes</h6>
+                                    <small>Desenvolvedor Front-end</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">Perguntas Frequentes</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                                <div class="faq-header" id="faqHeadingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                                        A acessibilidade digital é obrigatória no Brasil?
+                                    </button>
+                                </div>
+                                <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Sim, a acessibilidade digital é obrigatória no Brasil conforme estabelecido pela Lei Brasileira de Inclusão (Lei nº 13.146/2015). O artigo 63 da LBI determina que sites mantidos por empresas com sede ou representação comercial no país ou por órgãos de governo devem ser acessíveis para pessoas com deficiência, seguindo as melhores práticas e diretrizes internacionais.</p>
+                                        <p>Além disso, o Decreto nº 5.296/2004 já estabelecia a obrigatoriedade de acessibilidade nos portais e sítios eletrônicos da administração pública na rede mundial de computadores (Internet), para o uso das pessoas com deficiência.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                                <div class="faq-header" id="faqHeadingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                                        Quais são as consequências de não ter um site acessível?
+                                    </button>
+                                </div>
+                                <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>As consequências podem incluir:</p>
+                                        <ul>
+                                            <li><strong>Ações judiciais:</strong> Pessoas com deficiência podem processar por discriminação, com possibilidade de condenação a pagar indenizações por danos morais</li>
+                                            <li><strong>Multas:</strong> Órgãos públicos podem aplicar multas, especialmente em casos de sites governamentais ou de empresas concessionárias de serviços públicos</li>
+                                            <li><strong>Perda de clientes:</strong> Exclusão de um público significativo que poderia ser consumidor dos produtos ou serviços</li>
+                                            <li><strong>Danos à imagem:</strong> Impacto negativo na reputação da marca perante a sociedade</li>
+                                            <li><strong>Barreiras em licitações:</strong> Para empresas que trabalham com o governo, a falta de acessibilidade pode ser impeditivo em processos licitatórios</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                                <div class="faq-header" id="faqHeadingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                                        A acessibilidade digital beneficia apenas pessoas com deficiência?
+                                    </button>
+                                </div>
+                                <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Não. A acessibilidade digital beneficia todos os usuários, não apenas pessoas com deficiência. Alguns exemplos:</p>
+                                        <ul>
+                                            <li><strong>Pessoas idosas:</strong> Que podem ter dificuldades com textos pequenos ou interfaces complexas</li>
+                                            <li><strong>Usuários temporariamente incapacitados:</strong> Como alguém com um braço quebrado ou recuperando-se de cirurgia ocular</li>
+                                            <li><strong>Situações ambientais:</strong> Como usar o celular sob luz solar intensa (alto contraste ajuda)</li>
+                                            <li><strong>Conectividade limitada:</strong> Textos alternativos carregam mesmo quando imagens não</li>
+                                            <li><strong>Dispositivos variados:</strong> Conteúdo acessível funciona melhor em diferentes tamanhos de tela</li>
+                                            <li><strong>Busca orgânica:</strong> Sites acessíveis tendem a ter melhor SEO (otimização para motores de busca)</li>
+                                        </ul>
+                                        <p>Práticas de acessibilidade geralmente resultam em melhor usabilidade para todos os usuários.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                                <div class="faq-header" id="faqHeadingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+                                        Como começar a implementar acessibilidade no meu site?
+                                    </button>
+                                </div>
+                                <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>Algumas etapas iniciais para implementar acessibilidade:</p>
+                                        <ol>
+                                            <li><strong>Avalie seu site atual:</strong> Use ferramentas como WAVE ou axe DevTools para identificar problemas</li>
+                                            <li><strong>Priorize correções:</strong> Comece pelos problemas mais críticos que impedem totalmente o acesso</li>
+                                            <li><strong>Adicione texto alternativo:</strong> Para todas as imagens informativas</li>
+                                            <li><strong>Verifique contraste de cores:</strong> Garanta que o texto tenha contraste suficiente com o fundo</li>
+                                            <li><strong>Teste navegação por teclado:</strong> Certifique-se de que todo o site seja operável sem mouse</li>
+                                            <li><strong>Estruture corretamente:</strong> Use cabeçalhos (h1-h6) de forma lógica e elementos semânticos</li>
+                                            <li><strong>Capacite sua equipe:</strong> Ofereça treinamento em acessibilidade para desenvolvedores e designers</li>
+                                            <li><strong>Estabeleça processos:</strong> Inclua verificação de acessibilidade no fluxo de desenvolvimento</li>
+                                            <li><strong>Considere usuários reais:</strong> Se possível, faça testes com pessoas com diferentes tipos de deficiência</li>
+                                            <li><strong>Documente:</strong> Crie uma declaração de acessibilidade informando o nível de conformidade e como reportar problemas</li>
+                                        </ol>
+                                        <p>Lembre-se que acessibilidade é um processo contínuo, não um estado final.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+                                <div class="faq-header" id="faqHeadingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFive" aria-expanded="false" aria-controls="faqCollapseFive">
+                                        Quanto custa tornar um site acessível?
+                                    </button>
+                                </div>
+                                <div id="faqCollapseFive" class="accordion-collapse collapse" aria-labelledby="faqHeadingFive" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>O custo para tornar um site acessível varia significativamente dependendo de vários fatores:</p>
+                                        <ul>
+                                            <li><strong>Tamanho e complexidade do site:</strong> Sites maiores e mais complexos exigem mais trabalho</li>
+                                            <li><strong>Estado atual:</strong> Sites bem estruturados semanticamente exigem menos ajustes</li>
+                                            <li><strong>Nível de conformidade desejado:</strong> WCAG A, AA ou AAA</li>
+                                            <li><strong>Se é um novo projeto ou retrofit:</strong> Implementar desde o início é sempre mais barato</li>
+                                        </ul>
+                                        <p>Alguns cenários:</p>
+                                        <ul>
+                                            <li><strong>Site novo:</strong> Incluir acessibilidade desde o planejamento pode aumentar o custo em apenas 5-10%</li>
+                                            <li><strong>Site existente simples:</strong> Ajustes básicos podem custar de R$ 2.000 a R$ 10.000</li>
+                                            <li><strong>Site complexo:</strong> Reformulação completa pode custar dezenas de milhares de reais</li>
+                                            <li><strong>Manutenção contínua:</strong> Incluir acessibilidade nos processos reduz custos futuros</li>
+                                        </ul>
+                                        <p>É importante considerar que o custo de <strong>não</strong> ser acessível (processos, perda de clientes, retrabalho) geralmente supera o investimento em acessibilidade.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">Entre em Contato</h2>
+                <div class="row">
+                    <div class="col-lg-6 mb-4" data-aos="fade-right">
+                        <div class="contact-form">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Seu Nome" aria-label="Nome" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control" placeholder="Seu E-mail" aria-label="E-mail" required>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Assunto" aria-label="Assunto" required>
+                                <textarea class="form-control" rows="5" placeholder="Sua Mensagem" aria-label="Mensagem" required></textarea>
+                                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">Informações de Contato</h3>
+                                <ul class="list-unstyled">
+                                    <li class="mb-3">
+                                        <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                                        <strong>Endereço:</strong> Av. Paulista, 1000 - São Paulo/SP
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="fas fa-phone me-2 text-primary"></i>
+                                        <strong>Telefone:</strong> (11) 1234-5678
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="fas fa-envelope me-2 text-primary"></i>
+                                        <strong>E-mail:</strong> contato@acessibilidadedigital.com.br
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="fas fa-clock me-2 text-primary"></i>
+                                        <strong>Horário de Atendimento:</strong> Seg-Sex, 9h-18h
+                                    </li>
+                                </ul>
+                                <hr>
+                                <h4 class="mt-4">Siga-nos</h4>
+                                <div class="social-icons">
+                                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white">Acessibilidade Digital</h5>
+                    <p>Promovendo inclusão e igualdade de acesso à informação para todos os cidadãos brasileiros.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="text-white">Links Rápidos</h5>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#importance">Importância</a></li>
+                        <li><a href="#users">Usuários</a></li>
+                        <li><a href="#laws">Leis</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="text-white">Recursos</h5>
+                    <ul>
+                        <li><a href="#resources">Ferramentas</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">Glossário</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white">Newsletter</h5>
+                    <p>Assine nossa newsletter para receber atualizações sobre acessibilidade digital.</p>
+                    <form class="mt-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Seu e-mail" aria-label="Seu e-mail" aria-describedby="button-addon2">
+                            <button class="btn btn-primary" type="button" id="button-addon2">Assinar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Acessibilidade Digital. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#">Termos de Uso</a></li>
+                        <li class="list-inline-item"><a href="#">Política de Privacidade</a></li>
+                        <li class="list-inline-item"><a href="#">Mapa do Site</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Main JS -->
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        $('a[href*="#"]').on('click', function(e) {
+            e.preventDefault();
+            
+            $('html, body').animate(
+                {
+                    scrollTop: $($(this).attr('href')).offset().top - 70,
+                },
+                500,
+                'linear'
+            );
+        });
+        
+        // Back to top button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) {
+                $('.back-to-top').addClass('active');
+            } else {
+                $('.back-to-top').removeClass('active');
+            }
+        });
+        
+        // Tooltip initialization
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        
+        // Form submission
+        $('form').submit(function(e) {
+            e.preventDefault();
+            alert('Obrigado por sua mensagem! Entraremos em contato em breve.');
+            this.reset();
+        });
+        
+        // Accessibility features
+        // High contrast toggle
+        $('#high-contrast-toggle').click(function() {
+            $('body').toggleClass('high-contrast');
+            localStorage.setItem('highContrast', $('body').hasClass('high-contrast'));
+        });
+        
+        // Check for saved high contrast preference
+        if (localStorage.getItem('highContrast') === 'true') {
+            $('body').addClass('high-contrast');
+            $('#high-contrast-toggle').prop('checked', true);
+        }
+        
+        // Font size adjustment
+        $('#font-increase').click(function() {
+            changeFontSize(1);
+        });
+        
+        $('#font-decrease').click(function() {
+            changeFontSize(-1);
+        });
+        
+        $('#font-reset').click(function() {
+            $('body').css('font-size', '');
+            localStorage.removeItem('fontSize');
+        });
+        
+        function changeFontSize(direction) {
+            var currentSize = parseFloat($('body').css('font-size'));
+            if (isNaN(currentSize)) currentSize = 16; // default
+            
+            var newSize = currentSize + (direction * 2);
+            if (newSize >= 12 && newSize <= 24) { // reasonable limits
+                $('body').css('font-size', newSize + 'px');
+                localStorage.setItem('fontSize', newSize);
+            }
+        }
+        
+        // Check for saved font size preference
+        var savedFontSize = localStorage.getItem('fontSize');
+        if (savedFontSize) {
+            $('body').css('font-size', savedFontSize + 'px');
+        }
+        
+        // Animation on scroll for stats
+        $(window).scroll(function() {
+            $('.stats-number').each(function() {
+                var position = $(this).offset().top;
+                var scroll = $(window).scrollTop();
+                var windowHeight = $(window).height();
+                
+                if (scroll > position - windowHeight + 200) {
+                    if (!$(this).hasClass('animated')) {
+                        animateValue(this, 0, parseInt($(this).text()), 1000);
+                        $(this).addClass('animated');
+                    }
+                }
+            });
+        });
+        
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Trigger stats animation if already in view on page load
+        $(document).ready(function() {
+            $('.stats-number').each(function() {
+                var position = $(this).offset().top;
+                var scroll = $(window).scrollTop();
+                var windowHeight = $(window).height();
+                
+                if (scroll > position - windowHeight + 200) {
+                    if (!$(this).hasClass('animated')) {
+                        animateValue(this, 0, parseInt($(this).text()), 1000);
+                        $(this).addClass('animated');
+                    }
+                }
+            });
+        });
+        
+        // Video modal
+        $('.video-play-btn').click(function(e) {
+            e.preventDefault();
+            var videoSrc = $(this).data('video');
+            $('#videoModal iframe').attr('src', videoSrc + '?autoplay=1');
+            $('#videoModal').modal('show');
+        });
+        
+        $('#videoModal').on('hidden.bs.modal', function() {
+            $('#videoModal iframe').attr('src', '');
+        });
+        
+        // Keyboard navigation for accordion
+        $('.accordion-button').keydown(function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                $(this).click();
+            }
+        });
+        
+        // Focus management for modal
+        $('#videoModal').on('shown.bs.modal', function() {
+            $('#videoModal iframe').focus();
+        });
+    </script>
+</body>
+</html>
